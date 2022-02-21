@@ -1,9 +1,12 @@
 const { Sequelize } = require('sequelize')
 
-const sequelize = new Sequelize({
-    dialect: 'mysql',
-    host: '172.17.0.2:3306',
-    username: 'root',
-    password: 'supersecret'
-})
+const createDBConnection = new Sequelize({
+        database: 'twatter',
+        dialect: 'mysql',
+        host: '172.17.0.2',
+        port: 3306,
+        username: 'root',
+        password: 'supersecret'
+    })
+module.exports = createDBConnection
 
