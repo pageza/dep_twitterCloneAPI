@@ -29,7 +29,7 @@ app.use((req,res,next) => {
   );
   next();
 })
-app.use('/', usersRouter);
+// app.use('/', usersRouter);
 app.use('/posts', postsRouter);
 
 // TODO: break this out into it's own module later
@@ -60,6 +60,15 @@ const recreateDB = false
 
 sequelize.sync({force: recreateDB})
     .then(()=> console.log('Worked'), (err)=> console.log('An error occurred creating the table: ',err))
+const getUsers = (req,res) => {
+  if (!recreateDB) {
+    const users = User.findAll({
+      attributes:{exclude: ['id']}
+    })
+    res.json(users)
+  }
+}
+app.use('/', getUsers)
 
 app.listen(3030)
 module.exports = app;
