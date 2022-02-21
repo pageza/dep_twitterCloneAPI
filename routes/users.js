@@ -12,18 +12,15 @@ router.get('/', function(req, res) {
 // TODO: Get logged in user
 router.get('/:uname', (req,res) => {
   // sequelize call to db to get information of the logged in user
-  console.log("this is the req ",req.params)
-  res.json({
-    'status': 'success'
-  })
+    users.getOneUser(req,res)
 })
 // TODO: Get following users
-router.get('/:uname/followers', function(req, res) {
+router.get('/followers/:uname', function(req, res) {
   // sequelize call to db to get all the users that are following the currently logged in user
-    users.getFolllowers(req,res)
+    users.getFollowers(req,res)
 })
 // TODO: Get followed users
-router.get( '/:uname/followed', (req,res) => {
+router.get( '/followed/:uname', (req,res) => {
   // sequelize call to db to get all the users that the currently logged in user is following.
     users.getFollowedUsers(req,res)
 })
