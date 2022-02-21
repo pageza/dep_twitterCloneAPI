@@ -2,13 +2,12 @@ const express = require('express');
 const router = express.Router();
 const users = require('../controllers/usersController')
 
-/* GET users listing. */
 router.get('/', function(req, res) {
       users.getUsers(req,res)
 })
-
-// TODO: Create new user
-
+router.get('/create', (req,res) => {
+    users.createUser(req,res)
+})
 router.get('/:uname', (req,res) => {
     users.getOneUser(req,res)
 })
