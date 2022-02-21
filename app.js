@@ -25,8 +25,8 @@ app.use((req,res,next) => {
   );
   next();
 })
-app.use('/', usersRouter);
-app.use('/posts', postsRouter);
+app.use('/api/', usersRouter);
+app.use('/api/posts', postsRouter);
 
 app.listen(3030)
 module.exports = app;
