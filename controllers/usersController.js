@@ -1,10 +1,18 @@
 const User = require('../models/User')
+const {DataTypes} = require("sequelize");
 
 module.exports = {
     createUser: async (req,res) => {
-        const user = await User.create({
-            // map form fields to sequelize create func
-        })
+        console.log(req.body)
+        // const user = await User.create({
+        //     // map form fields to sequelize create func
+        //     id: ,
+        //     fname: ,
+        //     lname: ,
+        //     uname: ,
+        //     email: ,
+        //     password:
+        // })
     },
     getOneUser: async (req,res) => {
         const user = await User.findOne({

@@ -25,7 +25,7 @@ app.use((req,res,next) => {
   );
   next();
 })
-app.use('/api/', usersRouter);
+app.use('/api/user', usersRouter);
 app.use('/api/posts', postsRouter);
 
 app.listen(3030)

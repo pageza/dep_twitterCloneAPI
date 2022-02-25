@@ -2,15 +2,14 @@ const { DataTypes} = require("sequelize");
 const sequelize = require('../controllers/databaseController')
 
 const User = sequelize.define('User', {
-    idUsers: DataTypes.INTEGER,
+    id: {type: DataTypes.INTEGER, primaryKey: true},
     fname: DataTypes.STRING,
     lname: DataTypes.STRING,
     uname: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE,
-    Roles_idRoles: DataTypes.INTEGER
+    updatedAt: DataTypes.DATE
 })
 
 module.exports = User
