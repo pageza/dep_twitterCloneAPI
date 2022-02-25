@@ -2,21 +2,25 @@ const User = require('../models/User')
 
 module.exports = {
     createUser: async (req,res) => {
+        console.log(req.body)
         const user = await User.create({
-            // map form fields to sequelize create func
-        })
+            uname: req.body.uname,
+            fname: req.body.fname,
+            lname: req.body.lname,
+            email: req.body.email,
+            password: req.body.password
+            })
+        res.json("success")
     },
     getOneUser: async (req,res) => {
         const user = await User.findOne({
             where: { uname: req.params['uname']}
         })
-        res.json({'status': 'working'})
+        res.json(user)
     },
     getUsers: async (req,res) => {
-        const users = await User.findAll({
-            attributes: {exclude: ['id']}
-        })
-        res.json({'status': 'working'})
+        const users = await User.findAll()
+        res.json(users)
     },
     getFollowers: async (req,res) => {
         const followers = User.findAll({

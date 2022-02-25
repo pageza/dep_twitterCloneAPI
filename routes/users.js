@@ -5,7 +5,7 @@ const users = require('../controllers/usersController')
 router.get('/', function(req, res) {
       users.getUsers(req,res)
 })
-router.get('/create', (req,res) => {
+router.post('/create', (req,res) => {
     console.log('hit the route')
     users.createUser(req,res)
 })
