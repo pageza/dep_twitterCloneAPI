@@ -2,15 +2,21 @@ const User = require('../models/User')
 
 module.exports = {
     createUser: async (req,res) => {
-        console.log(req.body)
         const user = await User.create({
             uname: req.body.uname,
             fname: req.body.fname,
             lname: req.body.lname,
             email: req.body.email,
             password: req.body.password
+        })
+            .then((result)=>{
+                if(result) res.json(result.uname)
             })
-        res.json("success")
+            .catch((err)=>{
+                if(err.errors) {res.json(err.errors[0].message)}
+            })
+
+
     },
     getOneUser: async (req,res) => {
         const user = await User.findOne({

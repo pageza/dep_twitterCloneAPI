@@ -6,7 +6,6 @@ router.get('/', function(req, res) {
       users.getUsers(req,res)
 })
 router.post('/create', (req,res) => {
-    console.log('hit the route')
     users.createUser(req,res)
 })
 router.get('/:uname', (req,res) => {
