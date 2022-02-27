@@ -10,10 +10,10 @@ module.exports = {
             password: req.body.password
         })
             .then((result)=>{
-                if(result) res.json(result.uname)
+                if(result) res.json(results)
             })
             .catch((err)=>{
-                if(err.errors) {res.json(err.errors[0].message)}
+                if(err.errors) res.json(err.errors)
             })
 
 
