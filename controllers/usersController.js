@@ -9,8 +9,8 @@ module.exports = {
             email: req.body.email,
             password: req.body.password
         })
-            .then((result)=>{
-                if(result) res.json(results)
+            .then((user)=>{
+                if(user) res.json(user)
             })
             .catch((err)=>{
                 if(err.errors) res.json(err.errors)
@@ -28,16 +28,10 @@ module.exports = {
         const users = await User.findAll()
         res.json(users)
     },
-    getFollowers: async (req,res) => {
-        const followers = User.findAll({
-            where: {}
-        })
-        res.json({'status': 'working'})
-    },
-    getFollowedUsers: async (req,res) => {
-        const followedUsers = User.findAll({
-            where: {}
-        })
-        res.json({'status': 'working'})
+    updateUser: async (req,res) => {
+
+   },
+    deleteUser:async (req,res) => {
+
     }
 }
