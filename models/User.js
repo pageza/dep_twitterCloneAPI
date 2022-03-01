@@ -58,8 +58,13 @@ User.hasMany(Comment, {
     foreignKey: 'id'
 })
 Comment.belongsTo(User)
-// User.hasMany(Like, {
-//     foreignKey:
-// })
+User.hasMany(Like, {
+    foreignKey: 'userID'
+})
+Like.belongsTo(User)
+User.hasMany(Follow, {
+    foreignKey: ['follower_id', 'followee_id']
+})
+Follow.belongsTo(User)
 
 module.exports = User
