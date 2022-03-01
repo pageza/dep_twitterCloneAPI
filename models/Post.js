@@ -1,5 +1,6 @@
 const sequelize = require('../controllers/databaseController')
 const { DataTypes } = require('sequelize')
+const User = require('./User')
 
 const Post = sequelize.define('Post', {
     id: {
