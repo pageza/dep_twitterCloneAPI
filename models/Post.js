@@ -1,6 +1,8 @@
 const sequelize = require('../controllers/databaseController')
 const { DataTypes } = require('sequelize')
 const User = require('./User')
+const Comment = require('./Comment')
+const Like = require('./Like')
 
 const Post = sequelize.define('Post', {
     id: {
@@ -21,5 +23,12 @@ const Post = sequelize.define('Post', {
         type: DataTypes.INTEGER
     }
 })
+Post.hasMany(Comment, {
+    foreignKey: 'id'
+})
+Post.hasMany(Like, {
+    foreignKey: 'postID'
+})
+Post.belongsTo(User)
 
 module.exports = Post
