@@ -11,7 +11,7 @@ router.get('/', (req,res, next) => {
     posts.getAllPostsFromAllUsers(req,res).then(next)
 })
 // Get posts of currently viewed user
-router.get('/:uname', (req,res, next) => {
+router.get('/:userID', (req,res, next) => {
     posts.getAllPostsFromOneUser(req,res).then(next)
 })
 // Get posts of all users except followed users for Explore
