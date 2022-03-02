@@ -12,6 +12,5 @@ const Follow = sequelize.define('Follow', {
         primaryKey: true
     }
 })
-// Follow.belongsTo(User)
 
 module.exports = Follow

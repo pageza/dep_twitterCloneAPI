@@ -16,12 +16,13 @@ module.exports = {
             .catch(err => res.json(err.errors))
     },
     getOnePost: async (req,res) => {
+        console.log(req.params)
         const post = await Post.findOne({
             where: {
                 id: req.params['post']
             }
         })
-            .then(post => res.json(post))
+        res.json(post)
     },
     getAllPostsFromOneUser: async (req,res) => {
         const posts = await Post.findAll({
@@ -29,8 +30,8 @@ module.exports = {
                 userID: req.params['userID']
             }
         })
-            .then(posts => res.json(posts))
-            .catch(err => res.json(err.errors))
+        console.log(posts)
+        res.json(posts)
     },
     getAllPostsFromAllUsers: async (req,res) => {
         const posts = await Post.findAll()

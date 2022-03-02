@@ -26,10 +26,11 @@ const Post = sequelize.define('Post', {
 Post.hasMany(Comment, {
     foreignKey: 'id'
 })
+Comment.belongsTo(Post)
 Post.hasMany(Like, {
     foreignKey: 'postID'
 })
-// Post.belongsTo(User)
-// Comment.belongsTo(Post)
+Like.belongsTo(Post)
+
 
 module.exports = Post
