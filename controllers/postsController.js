@@ -1,3 +1,5 @@
+// noinspection JSCheckFunctionSignatures
+
 const { Op } = require('sequelize')
 const Post = require('../models/Post')
 const Follow = require('../models/Follow')
@@ -27,14 +29,15 @@ module.exports = {
                 userID: req.params['userID']
             }
         })
-            .then( posts => res.json(posts))
+            .then(posts => res.json(posts))
+            .catch(err => res.json(err.errors))
     },
     getAllPostsFromAllUsers: async (req,res) => {
         const posts = await Post.findAll()
-        res.json(posts)
+            .then(posts => res.json(posts))
     },
     getExplorePosts: async (req,res) => {
-        // First I need to find all of the follows by this user
+        // First I need to find all the follows by this user
         // const followed = await Follow.findAll({
         //     where:
         // })
@@ -46,10 +49,25 @@ module.exports = {
         // })
     },
     updatePost: async (req,res) => {
+        const post = await Post.update({
+            postContent: req.body.content
+        },{
+            where: {
+                postID: req.body.postID
+            }
+        })
+            .then(post => res.json(post))
+            .catch(err => res.json(err.errors))
 
     },
     deletePost: async (req,res) => {
-
-    }
+        await Post.destroy({
+            where: {
+               [Op.eq]: req.body.postID
+            }
+        })
+            .then(res.json('Deleted'))
+            .catch(err => res.json(err.errors))
+        }
 
 }
