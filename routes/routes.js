@@ -7,7 +7,7 @@ const likesRouter = require('./likes')
 const followsRouter = require('./follows')
 const app = require('../app')
 
-module.exports = routes => {
+module.exports = routes = routes => {
     app.use('/api/user', usersRouter),
     app.use('/api/posts', postsRouter),
     app.use('/api/comments', commentsRouter),

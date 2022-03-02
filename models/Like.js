@@ -11,6 +11,6 @@ const Like = sequelize.define('Like', {
         type: DataTypes.INTEGER
     }
 })
-Like.belongsTo(User)
-Like.belongsTo(Post)
+// Like.belongsTo(User)
+// Like.belongsTo(Post)
 module.exports = Like

@@ -29,6 +29,7 @@ Post.hasMany(Comment, {
 Post.hasMany(Like, {
     foreignKey: 'postID'
 })
-Post.belongsTo(User)
+// Post.belongsTo(User)
+// Comment.belongsTo(Post)
 
 module.exports = Post

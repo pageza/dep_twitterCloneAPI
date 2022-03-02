@@ -3,12 +3,12 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-// const usersRouter = require('./routes/users');
-// const postsRouter = require('./routes/posts');
-// const commentsRouter = require('./routes/comments');
-// const likesRouter = require('./routes/likes')
-// const followsRouter = require('./routes/follows')
-require('./routes/routes')(routes)
+const usersRouter = require('./routes/users');
+const postsRouter = require('./routes/posts');
+const commentsRouter = require('./routes/comments');
+const likesRouter = require('./routes/likes')
+const followsRouter = require('./routes/follows')
+// require('./routes/routes')(routes)
 
 const app = express();
 
@@ -29,11 +29,11 @@ app.use((req,res,next) => {
   );
   next();
 })
-// app.use('/api/user', usersRouter);
-// app.use('/api/posts', postsRouter);
-// app.use('/api/comments', commentsRouter)
-// app.use('/api/likes', likesRouter)
-// app.use('/api/follows', followsRouter)
+app.use('/api/user', usersRouter);
+app.use('/api/posts', postsRouter);
+app.use('/api/comments', commentsRouter)
+app.use('/api/likes', likesRouter)
+app.use('/api/follows', followsRouter)
 
 app.listen(3030)
 module.exports = app;
