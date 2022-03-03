@@ -10,6 +10,9 @@ const Follow = sequelize.define('Follow', {
     followee_id: {
         type: DataTypes.INTEGER,
         primaryKey: true
+    },
+    createdAt: {
+        type: DataTypes.DATE
     }
 })
 

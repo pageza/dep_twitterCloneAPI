@@ -16,7 +16,6 @@ module.exports = {
             .catch(err => res.json(err.errors))
     },
     getOnePost: async (req,res) => {
-        console.log(req.params)
         const post = await Post.findOne({
             where: {
                 id: req.params['post']
@@ -30,7 +29,6 @@ module.exports = {
                 userID: req.params['userID']
             }
         })
-        console.log(posts)
         res.json(posts)
     },
     getAllPostsFromAllUsers: async (req,res) => {
@@ -38,11 +36,10 @@ module.exports = {
             .then(posts => res.json(posts))
     },
     getExplorePosts: async (req,res) => {
-        // console.log('This is coming from explore posts',req)
-        // First I need to find all the follows by this user
+        // TODO: refactor to pull userID for logged-in user
+        let userID = req.headers.userid
         let followedList = []
-        //need to decide how to pull logged-in user to replace hardcoded value below
-        let userID = 4
+
         const followed = await Follow.findAll({
             attributes: { exclude: ['updatedAt','UserId']},
             where: { followee_id: userID }
@@ -52,14 +49,17 @@ module.exports = {
                     followedList.push(followed[i].dataValues.follower_id)
                 }
             })
-        // then I need to find all query excluding those users
+        // then I need to find all query excluding those users and the logged-in user
         const posts = await Post.findAll({
             where: {
-                [Op.ne]: userID,
-                [Op.notIn]: followedList
+                userID: {
+                    [Op.ne]: userID,
+                    [Op.notIn]: followedList
+                }
+
             }
         })
-            .then(posts => res.json(posts) )
+        res.json(posts)
     },
     updatePost: async (req,res) => {
         const post = await Post.update({
@@ -76,7 +76,7 @@ module.exports = {
     deletePost: async (req,res) => {
         await Post.destroy({
             where: {
-               [Op.eq]: req.body.postID
+               id: {[Op.eq]: req.body.postID}
             }
         })
             .then(res.json('Deleted'))

@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Follow = require('../models/Follow')
 
 module.exports = {
     createUser: async (req,res) => {
@@ -19,12 +20,18 @@ module.exports = {
 
     },
     getOneUser: async (req,res) => {
-        const user = await User.findOne({
+        const user = await User.findAll({
+            attributes: {
+            },
+            include: [{
+                model: Follow,
+            }],
             where: { uname: req.params['uname']}
         })
         res.json(user)
     },
     getUsers: async (req,res) => {
+        console.log('this is the User model: ', User.describe())
         const users = await User.findAll()
         res.json(users)
     },
