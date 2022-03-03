@@ -10,13 +10,13 @@ router.post('/create', (req,res, next) => {
 router.get('/', (req,res, next) => {
     posts.getAllPostsFromAllUsers(req,res).then(next)
 })
-// Get posts of currently viewed user
-router.get('/:userID/posts', (req,res, next) => {
-    posts.getAllPostsFromOneUser(req,res).then(next)
-})
 // Get posts of all users except followed users for Explore
 router.get('/explore', (req,res, next) => {
     posts.getExplorePosts(req,res).then(next)
+})
+// Get posts of currently viewed user
+router.get('/:userID/posts', (req,res, next) => {
+    posts.getAllPostsFromOneUser(req,res).then(next)
 })
 // Get post being viewed
 router.get('/:post', (req,res, next) => {

@@ -38,16 +38,28 @@ module.exports = {
             .then(posts => res.json(posts))
     },
     getExplorePosts: async (req,res) => {
+        // console.log('This is coming from explore posts',req)
         // First I need to find all the follows by this user
-        // const followed = await Follow.findAll({
-        //     where:
-        // })
-        // // then I need to find all query excluding those users
-        // const post = await Post.findAll({
-        //     where: {
-        //
-        //     }
-        // })
+        let followedList = []
+        //need to decide how to pull logged-in user to replace hardcoded value below
+        let userID = 4
+        const followed = await Follow.findAll({
+            attributes: { exclude: ['updatedAt','UserId']},
+            where: { followee_id: userID }
+        })
+            .then((followed) => {
+                for (let i=0; i< followed.length; i++) {
+                    followedList.push(followed[i].dataValues.follower_id)
+                }
+            })
+        // then I need to find all query excluding those users
+        const posts = await Post.findAll({
+            where: {
+                [Op.ne]: userID,
+                [Op.notIn]: followedList
+            }
+        })
+            .then(posts => res.json(posts) )
     },
     updatePost: async (req,res) => {
         const post = await Post.update({
